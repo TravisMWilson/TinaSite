@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catherine Hamaoui | Mortgage Agent | Breezeful Inc.</title>
+    <title>Catherine Hamaoui | Mortgage Associate | Breezeful Inc.</title>
     <meta
         name="description"
-        content="Strategic mortgages for complex lives. Connect with Catherine Hamaoui, Mortgage Agent with Breezeful Inc. in Moncton, NB."
+        content="Strategic mortgages for complex lives. Connect with Catherine Hamaoui, Mortgage Associate with Breezeful Inc. in Moncton, NB."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +18,7 @@
 
     <div class="compliance-strip">
         <div class="container compliance-strip__inner">
-            <span>Breezeful Inc.</span>
-            <span>Mortgage Brokerage</span>
-            <span>Catherine Hamaoui, Mortgage Agent</span>
-            <span>License # 260023490</span>
+            <span>Breezeful Inc. Mortgage Associate Catherine Hamaoui</span>
         </div>
     </div>
 
@@ -32,9 +29,41 @@
             </a>
 
             <nav class="site-nav" aria-label="Primary">
+                <div class="site-nav__dropdown" id="mortgagesDropdown">
+                    <button type="button" class="site-nav__dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="mortgagesMenu">
+                        Mortgages
+                        <span class="site-nav__dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="site-nav__dropdown-menu" id="mortgagesMenu" role="menu">
+                        <li role="none"><a role="menuitem" href="mortgages.html#pre-approval">Pre Approval</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#refinance">Mortgage Refinance</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#renewal">Mortgage Renewal</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#private">Private Mortgage</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#second">Second Mortgage</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#heloc">HELOC</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#rent-to-own">Rent to Own</a></li>
+                        <li role="none" class="site-nav__dropdown-separator" aria-hidden="true"></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#commercial-lending">Commercial Lending</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#commercial-multi-unit">Commercial Multi-Unit</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#commercial-industrial">Commercial Industrial</a></li>
+                        <li role="none"><a role="menuitem" href="mortgages.html#commercial-new-construction">Commercial New Construction</a></li>
+                    </ul>
+                </div>
                 <a href="#contact">Contact</a>
                 <a href="#booking">Booking</a>
-                <a href="#calculators">Calculators</a>
+                <div class="site-nav__dropdown" id="calculatorsDropdown">
+                    <button type="button" class="site-nav__dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="calculatorsMenu">
+                        Calculators
+                        <span class="site-nav__dropdown-caret" aria-hidden="true"></span>
+                    </button>
+                    <ul class="site-nav__dropdown-menu" id="calculatorsMenu" role="menu">
+                        <li role="none"><a role="menuitem" href="#paymentForm">Monthly Payment Estimator</a></li>
+                        <li role="none"><a role="menuitem" href="#affordabilityForm">Affordability Snapshot</a></li>
+                        <li role="none"><a role="menuitem" href="#gdsForm">Gross Debt Service (GDS)</a></li>
+                        <li role="none"><a role="menuitem" href="#tdsForm">Total Debt Service (TDS)</a></li>
+                    </ul>
+                </div>
+                <a href="#faq">FAQ</a>
                 <a class="site-nav__apply" id="applyHeaderCta" href="https://breezeful.com/brokerage-agent/catherine-hamaoui" target="_blank" rel="noreferrer">Apply Online</a>
             </nav>
         </div>
@@ -46,7 +75,7 @@
             <div class="hero__signature" aria-hidden="true">Catherine Hamaoui</div>
             <div class="container hero__grid">
                 <div class="hero__copy" data-reveal>
-                    <p class="eyebrow">Moncton, New Brunswick | hamaouimortgages.ca</p>
+                    <p class="eyebrow">Moncton, New Brunswick</p>
                     <h1>Strategic Mortgages for Complex Lives.</h1>
                     <p class="lead">
                         Structured mortgage guidance for purchases, new builds, renewals, and refinances — backed by Breezeful Inc. in Moncton.
@@ -56,12 +85,6 @@
                         <a class="button button--primary" id="applyHeroCta" href="https://breezeful.com/brokerage-agent/catherine-hamaoui" target="_blank" rel="noreferrer">Apply Online</a>
                         <a class="button button--secondary" id="bookingHeroCta" href="#booking">Book a Consultation</a>
                     </div>
-
-                    <ul class="hero__details" aria-label="Contact summary">
-                        <li><span>Email</span><a href="mailto:catherine.hamaoui@teambreezeful.com">catherine.hamaoui@teambreezeful.com</a></li>
-                        <li><span>Mobile</span><a href="tel:+16133155040">613&nbsp;315&nbsp;5040</a></li>
-                        <li><span>Office</span><span>Prestige Center, 500 St. George Street, Moncton, NB</span></li>
-                    </ul>
                 </div>
 
                 <div class="hero__visual" data-reveal>
@@ -73,11 +96,10 @@
                         >
                     </div>
 
-                    <ul class="signal-tags">
-                        <li>Moncton &amp; New Brunswick</li>
-                        <li>New builds &amp; construction</li>
-                        <li>Organized &mdash; fast response</li>
-                    </ul>
+                    <div class="hero__visual-caption">
+                        <p class="section-kicker section-kicker--light">Catherine Hamaoui</p>
+                        <h2>Mortgage Associate</h2>
+                    </div>
                 </div>
             </div>
         </section>
@@ -95,19 +117,19 @@
                     </div>
 
                     <div class="contact-card__layout">
-                        <div class="contact-card__details" aria-label="Direct contact options">
-                            <a class="contact-card__action" href="mailto:catherine.hamaoui@teambreezeful.com">
-                                <span>Email</span>
-                                <strong>catherine.hamaoui@teambreezeful.com</strong>
-                            </a>
-                            <a class="contact-card__action" href="tel:+16133155040">
-                                <span>Mobile</span>
-                                <strong>613 315 5040</strong>
-                            </a>
-                            <a class="contact-card__action" href="https://hamaouimortgages.ca" target="_blank" rel="noreferrer">
-                                <span>Website</span>
-                                <strong>hamaouimortgages.ca</strong>
-                            </a>
+                        <div class="contact-card__details contact-business-card" aria-label="Direct contact options">
+                            <p>
+                                <span class="bc-label">E:</span>
+                                <a href="mailto:catherine.hamaoui@teambreezeful.com">catherine.hamaoui@teambreezeful.com</a>
+                            </p>
+                            <p>
+                                <span class="bc-label">M:</span>
+                                <a href="tel:+16133155040">613.315.5040</a>
+                            </p>
+                            <p>
+                                <span class="bc-label">W:</span>
+                                <a href="https://hamaouimortgages.ca" target="_blank" rel="noreferrer">hamaouimortgages.ca</a>
+                            </p>
                         </div>
 
                         <form class="contact-form" id="contactForm" aria-describedby="contactFormHint">
@@ -116,9 +138,24 @@
                                     <span>Full Name</span>
                                     <input type="text" name="name" autocomplete="name" placeholder="Your name" required>
                                 </label>
-                                <label class="contact-form__field">
+                                <label class="contact-form__field contact-form__field--email contact-form__field--full">
                                     <span>Email Address</span>
-                                    <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+                                    <div class="contact-form__email-group">
+                                        <input type="text" id="contactEmailUser" name="email_user" autocomplete="off" spellcheck="false" placeholder="you" required>
+                                        <span class="contact-form__at" aria-hidden="true">@</span>
+                                        <select id="contactEmailDomain" class="contact-form__domain-select" name="email_domain" autocomplete="off" required>
+                                            <option value="" disabled selected>Choose domain</option>
+                                            <option value="gmail.com">gmail.com</option>
+                                            <option value="hotmail.com">hotmail.com</option>
+                                            <option value="outlook.com">outlook.com</option>
+                                            <option value="live.ca">live.ca</option>
+                                            <option value="yahoo.com">yahoo.com</option>
+                                            <option value="icloud.com">icloud.com</option>
+                                            <option value="__custom__">Other (type your own)…</option>
+                                        </select>
+                                        <input type="text" id="contactEmailCustom" class="contact-form__domain-custom" name="email_custom" placeholder="yourdomain.com" hidden>
+                                        <input type="hidden" id="contactFullEmail" name="email">
+                                    </div>
                                 </label>
                                 <label class="contact-form__field">
                                     <span>Phone Number</span>
@@ -160,26 +197,87 @@
                 <div data-reveal>
                     <p class="section-kicker">Book A Consultation</p>
                     <h2>Find the right time to talk.</h2>
-                    <p>
-                        A booking tool such as Calendly can be connected here once approval is confirmed. Until then,
-                        request a time directly and Catherine can confirm the best slot.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Phone or video consultations</li>
-                        <li>Purchase, refinance, renewal, or strategy review</li>
-                        <li>Fast follow-up from the Moncton office</li>
-                    </ul>
                 </div>
 
                 <article class="booking-card" data-reveal>
-                    <p class="booking-card__status" id="bookingStatus">Approval pending</p>
                     <h3>Consultation scheduling</h3>
                     <p id="bookingSummary">
-                        The live booking link will be added after approval. For now, use email or phone to request a time.
+                        Fill in your details, pick a date and time, and Catherine will confirm the slot.
                     </p>
-                    <a class="button button--primary" id="bookingCardLink" href="mailto:catherine.hamaoui@teambreezeful.com?subject=Consultation%20Request">
-                        Request A Time
-                    </a>
+
+                    <form class="booking-form" id="bookingForm" novalidate>
+                        <p class="booking-form__row booking-form__row--to">
+                            <span class="booking-form__field-label">To</span>
+                            <input type="email" id="bookingToEmail" value="catherine.hamaoui@teambreezeful.com" readonly aria-readonly="true">
+                        </p>
+
+                        <div class="booking-form__grid">
+                            <label class="booking-form__field">
+                                <span>From — Your name</span>
+                                <input type="text" id="bookingName" autocomplete="name" placeholder="Your name" required>
+                            </label>
+                            <div class="booking-form__field booking-form__field--full booking-form__field--email">
+                                <span>From — Your email</span>
+                                <div class="booking-form__email-group">
+                                    <input type="text" id="bookingEmailUser" autocomplete="off" spellcheck="false" placeholder="you" required>
+                                    <span class="booking-form__at" aria-hidden="true">@</span>
+                                    <select id="bookingEmailDomain" class="booking-form__domain-select" autocomplete="off" required>
+                                        <option value="" disabled selected>Choose domain</option>
+                                        <option value="gmail.com">gmail.com</option>
+                                        <option value="hotmail.com">hotmail.com</option>
+                                        <option value="outlook.com">outlook.com</option>
+                                        <option value="live.ca">live.ca</option>
+                                        <option value="yahoo.com">yahoo.com</option>
+                                        <option value="icloud.com">icloud.com</option>
+                                        <option value="__custom__">Other (type your own)…</option>
+                                    </select>
+                                    <input type="text" id="bookingEmailCustom" class="booking-form__domain-custom" placeholder="yourdomain.com" hidden>
+                                </div>
+                                <input type="hidden" id="bookingFromEmail" name="fromEmail">
+                            </div>
+                            <label class="booking-form__field">
+                                <span>Phone</span>
+                                <input type="tel" id="bookingPhone" autocomplete="tel" placeholder="613.315.5040">
+                            </label>
+                            <label class="booking-form__field">
+                                <span>Type of meeting</span>
+                                <select id="bookingMeetingType" required>
+                                    <option value="" selected disabled>Select one</option>
+                                    <option value="Virtual">Virtual</option>
+                                    <option value="In Person">In Person</option>
+                                    <option value="Phone Call">Phone Call</option>
+                                </select>
+                            </label>
+                        </div>
+                    </form>
+
+                    <div class="booking-picker" id="bookingPicker">
+                        <div class="booking-picker__header">
+                            <button type="button" class="booking-picker__nav" id="bookingPrevMonth" aria-label="Previous month">&lsaquo;</button>
+                            <h4 class="booking-picker__title" id="bookingMonthLabel">Loading…</h4>
+                            <button type="button" class="booking-picker__nav" id="bookingNextMonth" aria-label="Next month">&rsaquo;</button>
+                        </div>
+
+                        <div class="booking-picker__weekdays" aria-hidden="true">
+                            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                        </div>
+
+                        <div class="booking-picker__grid" id="bookingDayGrid" role="grid" aria-label="Available days"></div>
+
+                        <div class="booking-picker__times" id="bookingTimeSection" hidden>
+                            <p class="booking-picker__times-label">Available times for <span id="bookingSelectedDateLabel"></span></p>
+                            <div class="booking-picker__time-grid" id="bookingTimeGrid" role="listbox" aria-label="Available times"></div>
+                        </div>
+
+                        <div class="booking-picker__confirm" id="bookingConfirm" hidden>
+                            <p class="booking-picker__confirm-text">
+                                <span class="booking-picker__confirm-label">Your request</span>
+                                <span class="booking-picker__confirm-value" id="bookingConfirmValue"></span>
+                            </p>
+                            <a class="button button--primary" id="bookingSendRequest" href="#">Send Request</a>
+                            <button type="button" class="booking-picker__reset" id="bookingReset">Pick a different time</button>
+                        </div>
+                    </div>
                 </article>
             </div>
         </section>
@@ -198,15 +296,24 @@
                     <form class="calculator-card" id="paymentForm" data-reveal>
                         <h3>Monthly Payment Estimator</h3>
                         <label>
-                            Mortgage amount
+                            <span class="label-text">
+                                Mortgage amount
+                                <button type="button" class="help-icon" aria-label="Help for Mortgage amount" data-tip="The total amount you are borrowing — the home's purchase price minus your down payment.">?</button>
+                            </span>
                             <input type="number" id="mortgageAmount" min="0" step="1000" value="420000">
                         </label>
                         <label>
-                            Interest rate %
+                            <span class="label-text">
+                                Interest rate %
+                                <button type="button" class="help-icon" aria-label="Help for Interest rate" data-tip="Your annual mortgage interest rate (e.g. 4.79 for 4.79% per year).">?</button>
+                            </span>
                             <input type="number" id="interestRate" min="0" step="0.01" value="4.79">
                         </label>
                         <label>
-                            Amortization years
+                            <span class="label-text">
+                                Amortization years
+                                <button type="button" class="help-icon" aria-label="Help for Amortization years" data-tip="The total length of your mortgage. 25 years is the most common in Canada (range is typically 15-30).">?</button>
+                            </span>
                             <input type="number" id="amortizationYears" min="1" step="1" value="25">
                         </label>
 
@@ -220,19 +327,31 @@
                     <form class="calculator-card" id="affordabilityForm" data-reveal>
                         <h3>Affordability Snapshot</h3>
                         <label>
-                            Annual household income
+                            <span class="label-text">
+                                Annual household income
+                                <button type="button" class="help-icon" aria-label="Help for Annual household income" data-tip="Combined gross (pre-tax) yearly income for everyone on the application. Annual figure.">?</button>
+                            </span>
                             <input type="number" id="annualIncome" min="0" step="1000" value="135000">
                         </label>
                         <label>
-                            Monthly debt payments
+                            <span class="label-text">
+                                Monthly debt payments
+                                <button type="button" class="help-icon" aria-label="Help for Monthly debt payments" data-tip="Add up all monthly debt payments: car loans, credit cards, lines of credit, student loans. Monthly figure.">?</button>
+                            </span>
                             <input type="number" id="monthlyDebts" min="0" step="50" value="650">
                         </label>
                         <label>
-                            Down payment
+                            <span class="label-text">
+                                Down payment
+                                <button type="button" class="help-icon" aria-label="Help for Down payment" data-tip="Total cash you will put toward the purchase. Minimum 5% in Canada (5%-20% is typical).">?</button>
+                            </span>
                             <input type="number" id="downPayment" min="0" step="1000" value="45000">
                         </label>
                         <label>
-                            Stress-test rate %
+                            <span class="label-text">
+                                Stress-test rate %
+                                <button type="button" class="help-icon" aria-label="Help for Stress-test rate" data-tip="The qualifying rate your lender uses — usually the contract rate + 2% or 5.25%, whichever is higher. Annual %.">?</button>
+                            </span>
                             <input type="number" id="qualifyingRate" min="0" step="0.01" value="5.25">
                         </label>
 
@@ -243,15 +362,139 @@
                         </div>
                     </form>
 
-                    <article class="calculator-card calculator-card--notes" data-reveal>
-                        <h3>Preparation Notes</h3>
-                        <ul class="notes-list">
-                            <li>Gather income documents, photo ID, and down payment records early.</li>
-                            <li>Include monthly debt obligations for a more useful affordability snapshot.</li>
-                            <li>Ask for a tailored review when income, construction, or property details are unusual.</li>
-                        </ul>
-                        <a class="button button--secondary" href="#contact">Discuss Your Scenario</a>
-                    </article>
+                    <form class="calculator-card" id="gdsForm" data-reveal>
+                        <h3>Gross Debt Service (GDS)</h3>
+                        <label>
+                            <span class="label-text">
+                                Annual household income
+                                <button type="button" class="help-icon" aria-label="Help for Annual household income" data-tip="Combined gross (pre-tax) yearly income for everyone on the application. Annual figure.">?</button>
+                            </span>
+                            <input type="number" id="gdsAnnualIncome" min="0" step="1000" value="95000">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly mortgage payment
+                                <button type="button" class="help-icon" aria-label="Help for Monthly mortgage payment" data-tip="Estimated monthly mortgage payment — principal + interest only. Monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="gdsMortgagePayment" min="0" step="50" value="1900">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly property tax
+                                <button type="button" class="help-icon" aria-label="Help for Monthly property tax" data-tip="Take your annual property tax and divide by 12 to get this monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="gdsPropertyTax" min="0" step="25" value="280">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly heating cost
+                                <button type="button" class="help-icon" aria-label="Help for Monthly heating cost" data-tip="Average monthly heating bill (gas, oil, or electric heat). Monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="gdsHeating" min="0" step="25" value="160">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly condo fees (50% counted)
+                                <button type="button" class="help-icon" aria-label="Help for Condo fees" data-tip="Your full monthly condo fees — only 50% is counted toward GDS by lenders. Leave 0 if not applicable. Monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="gdsCondoFees" min="0" step="25" value="0">
+                        </label>
+
+                        <div class="calculator-output" id="gdsOutput" data-limit="39" data-max="50">
+                            <span>GDS ratio</span>
+                            <strong id="gdsRatioValue">0%</strong>
+                            <small id="gdsStatus">Target: 35% or lower.</small>
+                            <div class="limit-bar" aria-hidden="true">
+                                <div class="limit-bar__track">
+                                    <div class="limit-bar__fill" id="gdsLimitFill"></div>
+                                    <div class="limit-bar__threshold" style="left: 100%;">
+                                        <span class="limit-bar__threshold-label">39%</span>
+                                    </div>
+                                </div>
+                                <div class="limit-bar__legend">
+                                    <span>0%</span>
+                                    <span>39% limit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="calculator-card" id="tdsForm" data-reveal>
+                        <h3>Total Debt Service (TDS)</h3>
+                        <label>
+                            <span class="label-text">
+                                Annual household income
+                                <button type="button" class="help-icon" aria-label="Help for Annual household income" data-tip="Combined gross (pre-tax) yearly income for everyone on the application. Annual figure.">?</button>
+                            </span>
+                            <input type="number" id="tdsAnnualIncome" min="0" step="1000" value="95000">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly housing costs (GDS)
+                                <button type="button" class="help-icon" aria-label="Help for Monthly housing costs" data-tip="Your total monthly housing costs: mortgage + property tax + heat + 50% of condo fees. Monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="tdsHousingCosts" min="0" step="50" value="2340">
+                        </label>
+                        <label>
+                            <span class="label-text">
+                                Monthly debt &amp; loan payments
+                                <button type="button" class="help-icon" aria-label="Help for Monthly debt payments" data-tip="Add up all other monthly debt payments: car loans, credit cards, lines of credit, student loans. Monthly figure.">?</button>
+                            </span>
+                            <input type="number" id="tdsOtherDebts" min="0" step="50" value="650">
+                        </label>
+
+                        <div class="calculator-output" id="tdsOutput" data-limit="44" data-max="50">
+                            <span>TDS ratio</span>
+                            <strong id="tdsRatioValue">0%</strong>
+                            <small id="tdsStatus">Target: 42% or lower.</small>
+                            <div class="limit-bar" aria-hidden="true">
+                                <div class="limit-bar__track">
+                                    <div class="limit-bar__fill" id="tdsLimitFill"></div>
+                                    <div class="limit-bar__threshold" style="left: 100%;">
+                                        <span class="limit-bar__threshold-label">44%</span>
+                                    </div>
+                                </div>
+                                <div class="limit-bar__legend">
+                                    <span>0%</span>
+                                    <span>44% limit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="calculator-explainer" data-reveal>
+                    <h3>Understanding GDS and TDS</h3>
+                    <p>
+                        Find out what your gross debt and total debt service ratios are. These are the same ratios lenders use when reviewing your mortgage application, so they're a great way to check your eligibility before you start shopping.
+                    </p>
+
+                    <h4>What are GDS and TDS?</h4>
+                    <p>
+                        GDS and TDS stand for <strong>gross debt service</strong> and <strong>total debt service</strong> ratios. They are percentages of your income that cover your:
+                    </p>
+                    <ul>
+                        <li><strong>GDS:</strong> Housing costs (mortgage, property tax, heat, and 50% of condo fees)</li>
+                        <li><strong>TDS:</strong> Housing costs <em>and</em> all other debts (car loans, credit cards, student loans, lines of credit, etc.)</li>
+                    </ul>
+
+                    <h4>How are they calculated?</h4>
+                    <p>
+                        <strong>Gross debt service ratio</strong> = (mortgage payment + property tax + heating + 50% of condo fees) × 12 ÷ annual income.
+                    </p>
+                    <p>
+                        <strong>Total debt service ratio</strong> = (housing costs + other monthly debts) × 12 ÷ annual income.
+                    </p>
+
+                    <h4>Why are they important?</h4>
+                    <p>
+                        They show you and your lender how much you can responsibly borrow to buy a home. If you go over the standard limits (39% GDS / 44% TDS), most lenders will either look for a larger down payment or ask you to pay down some of your outstanding debts. GDS and TDS also come into play when you're granted a mortgage pre-approval.
+                    </p>
+
+                    <h4>What is a good GDS and TDS?</h4>
+                    <p>
+                        For standard insured mortgages in New Brunswick (down payment less than 20%), the maximum qualifying limits strictly enforced by financial institutions and insurers like the <a href="https://www.cmhc-schl.gc.ca/consumers/home-buying/calculators/debt-service-calculator" target="_blank" rel="noopener">Canada Mortgage and Housing Corporation</a> are <strong>39% for GDS</strong> and <strong>44% for TDS</strong>. Because Breezeful works with 100+ lender partners, we can support up to <strong>45% GDS / 47% TDS</strong>, and up to <strong>50%</strong> on both under certain conditions (for example, a down payment of 35% or more).
+                    </p>
                 </div>
             </div>
         </section>
@@ -290,33 +533,249 @@
                 </div>
             </div>
         </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-kicker">Frequently Asked Questions</p>
+                    <h2>Mortgage Questions, Answered</h2>
+                    <p>Most asked questions from New Brunswick clients.</p>
+                </div>
+
+                <div class="faq__list">
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>Why should I work with a mortgage broker?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Mortgages come with a lot of moving parts — fixed versus variable rates, term length, penalties, payment frequency, and dozens of lender options. A qualified mortgage professional helps you compare them with confidence. Rate is only one factor in choosing the best product. Catherine and the Breezeful team are familiar with a wide range of mortgage products and work to match you with the option that fits your goals, so you can focus on finding a home you love.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What does it cost to use a mortgage broker?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Nothing up front. From your first consultation through to closing, the service is free. Lenders pay the broker based on the volume of business sent their way and the length of your term — not on the interest rate you're offered. We only get paid when your mortgage funds, so our incentive is aligned with getting you the right product and the best rate possible.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the difference between a mortgage broker and a bank?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>There are generally two paths to a Canadian mortgage: a bank, or a licensed mortgage professional. A bank only offers its own products, while a broker sends hundreds of millions of dollars in mortgage business each year to Canada's largest banks, credit unions, trust companies, and other financial institutions. That means more choice, more products, and unbiased advice — whether you're buying your first home, pulling equity out for investment or renovation, or renewing an existing mortgage.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>Can a broker get me a better rate than my bank?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>In most cases, yes. Because we negotiate across many lenders at once, we create competition for your mortgage. Many of our clients save thousands compared to what their bank initially offered.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>Do I need good credit to qualify for a mortgage?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Not necessarily. There are mortgage products available for nearly every credit situation. Stronger credit and higher scores typically unlock lower interest rates and lower down payment options. If your credit needs work, you may need a larger down payment and should expect a higher rate — but options do exist.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the minimum down payment required?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>In Canada, the minimum down payment to purchase a home is 5%. Some lenders will also allow you to borrow that 5% down payment, depending on your situation.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the mortgage stress test?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>The stress test is a set of rules used to figure out how much you qualify for. The Canadian government sets a minimum qualifying rate to make sure you'd still be able to afford your payments if interest rates went up after you signed.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the Home Buyers' Plan?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Thanks to a federal program, first-time home buyers can withdraw up to $35,000 from their RRSPs ($70,000 per couple) to put toward their down payment, tax-free, with repayment terms set by the government.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What does a lender consider when reviewing a mortgage application?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Lenders typically weigh five factors:</p>
+                            <ol>
+                                <li><strong>Credit</strong> — your score, payment history, length of credit history, and current debt load.</li>
+                                <li><strong>Capital</strong> — your net worth (assets minus liabilities).</li>
+                                <li><strong>Capacity</strong> — your income-to-debt ratio, which shows whether you can afford the loan.</li>
+                                <li><strong>Character</strong> — employment and address history, and a track record of meeting past obligations.</li>
+                                <li><strong>Collateral</strong> — the property itself: condition, location, and resale history.</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the difference between a pre-qualification and a pre-approval?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>A pre-qualification gives you a ballpark idea of how much you might qualify for and what your payments could look like. A pre-approval goes further — you submit the supporting documents (income verification, down payment confirmation, existing property paperwork, etc.) needed to finalize an application. Pre-approvals are typically good for 120 days and let you lock in a rate, so you're protected if rates rise while you shop. If rates drop, you get the lower rate either way.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What costs are associated with getting a mortgage?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Plan to have a few thousand dollars on top of your down payment for closing costs. That typically includes legal fees to close the transaction and register the title, and most buyers also budget for a property inspection and, depending on the deal, an appraisal.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>How does an income suite affect my borrowing power?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Your income determines how much you qualify for. Adding a legal mortgage helper, like an income suite, brings in additional rental income that can be added to your application and increase the mortgage amount you qualify for.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>Can I get a mortgage if I am self-employed?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Yes. Self-employed borrowers can qualify, but you should expect to provide extra documentation, including:</p>
+                            <ul>
+                                <li>Two years of Notice of Assessment</li>
+                                <li>Two years of T1 Generals</li>
+                                <li>Proof that you've been in business for at least two years (such as a business license)</li>
+                            </ul>
+                            <p>If some of those documents are missing, or your personal claimed income is on the lower side, there are still options. Reach out to discuss your specific situation.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the difference between variable and fixed rates?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>A fixed rate locks you in for the term, so your monthly payment stays the same. A variable rate usually starts lower than a fixed rate, but it can move up or down with the Bank of Canada's posted rate.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is the difference between an open and a closed mortgage?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>An open mortgage lets you pay it off or break the term at any time without penalty. A closed mortgage does charge a penalty if you break the term before it matures — usually calculated as either the Interest Rate Differential (IRD) or three months of interest.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What is IRD?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>IRD stands for Interest Rate Differential. It's a penalty that can apply to a closed fixed-rate mortgage if you break the term early. The exact calculation depends on the lender, but in simple terms: the difference between your current rate and the rate at the time you break, multiplied by your remaining balance and the time left in your term.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>Can I make a large purchase after being approved for a mortgage?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>It's best to hold off. Lenders can re-pull credit up to 30 days before closing if anything has changed. New car loans, financed furniture, or other large commitments can put your approval at risk, so we recommend waiting until after you take possession.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-item__question">
+                            <span>What do I do when my mortgage is up for renewal?</span>
+                            <span class="faq-item__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="faq-item__answer">
+                            <p>Give us a call. Your existing lender doesn't always offer the most competitive renewal rate. We'll shop the market and present you with the best options from across our lender panel. Many lenders will even cover the legal costs to switch your mortgage over, which can mean real savings for you.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
         <div class="container footer-grid">
             <div>
                 <p class="section-kicker section-kicker--light">Catherine Hamaoui</p>
-                <h2>Mortgage Agent</h2>
-                <p>Breezeful Inc.</p>
-                <p>hamaouimortgages.ca</p>
+                <h2>Mortgage Associate</h2>
             </div>
 
-            <div>
+            <div class="footer-business-card">
                 <p class="footer-heading">Contact</p>
-                <p><a href="mailto:catherine.hamaoui@teambreezeful.com">catherine.hamaoui@teambreezeful.com</a></p>
-                <p><a href="tel:+16133155040">613 315 5040</a></p>
-                <p>Prestige Center, 500 St. George Street, Moncton, New Brunswick</p>
+                <p>
+                    <span class="bc-label">E:</span>
+                    <a href="mailto:catherine.hamaoui@teambreezeful.com">catherine.hamaoui@teambreezeful.com</a>
+                </p>
+                <p>
+                    <span class="bc-label">M:</span>
+                    <a href="tel:+16133155040">613.315.5040</a>
+                </p>
+                <p>
+                    <span class="bc-label">W:</span>
+                    <a href="https://hamaouimortgages.ca" target="_blank" rel="noreferrer">hamaouimortgages.ca</a>
+                </p>
+                <p class="bc-office">
+                    <span class="bc-label">Office:</span>
+                    Prestige Center, 500 St. George Street, Moncton, New Brunswick
+                </p>
             </div>
 
             <div>
                 <p class="footer-heading">Regulatory</p>
                 <p>
-                    Breezeful Inc., Mortgage Brokerage. Catherine Hamaoui, Mortgage Agent, License&nbsp;#&nbsp;260023490.
                     Information on this page is for general guidance only and does not constitute financial or mortgage advice.
                 </p>
                 <p class="footer-meta">&copy; <span id="currentYear"></span> Catherine Hamaoui | Breezeful Inc.</p>
             </div>
         </div>
+        <p class="footer-license">License # 260023490 Mortgage Brokerage - Breezeful Inc. - New Brunswick (230013022), Catherine Hamaoui - Mortgage Associate - New Brunswick - (260023490)</p>
     </footer>
 
     <script src="script.js"></script>

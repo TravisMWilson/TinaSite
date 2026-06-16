@@ -7,6 +7,8 @@
     --stone: #C6BEA9;
     --stone-deep: #b3aa95;
     --stone-rgb: 198, 190, 169;
+    --ink: #141C26;
+    --ink-rgb: 20, 28, 38;
     --sand: #ece7dc;
     --muted: rgba(198, 190, 169, 0.74);
     --line: rgba(198, 190, 169, 0.18);
@@ -47,6 +49,7 @@ img {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 button,
@@ -96,7 +99,6 @@ input {
     position: sticky;
     top: 0;
     z-index: 50;
-    overflow: clip;
     backdrop-filter: blur(16px);
     background: rgba(var(--black-rgb), 0.9);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -194,6 +196,128 @@ input {
     border-radius: 999px;
 }
 
+/* Mortgages dropdown */
+.site-nav__dropdown {
+    position: relative;
+}
+
+.site-nav__dropdown-trigger {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.site-nav__dropdown-trigger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.45rem;
+    width: 100%;
+    height: 2px;
+    background: var(--magenta);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.22s ease;
+}
+
+.site-nav__dropdown-trigger:hover,
+.site-nav__dropdown-trigger:focus-visible,
+.site-nav__dropdown.is-open .site-nav__dropdown-trigger {
+    color: var(--magenta);
+}
+
+.site-nav__dropdown-trigger:hover::after,
+.site-nav__dropdown-trigger:focus-visible::after,
+.site-nav__dropdown.is-open .site-nav__dropdown-trigger::after {
+    transform: scaleX(1);
+}
+
+.site-nav__dropdown-caret {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.2s ease;
+}
+
+.site-nav__dropdown.is-open .site-nav__dropdown-caret {
+    transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.site-nav__dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    min-width: 240px;
+    margin: 0;
+    padding: 0.5rem;
+    list-style: none;
+    background: linear-gradient(180deg, var(--black-soft), var(--black));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 60;
+}
+
+.site-nav__dropdown.is-open .site-nav__dropdown-menu,
+.site-nav__dropdown:hover .site-nav__dropdown-menu,
+.site-nav__dropdown:focus-within .site-nav__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.site-nav__dropdown-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.site-nav__dropdown-menu a {
+    display: block;
+    padding: 0.7rem 0.9rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.site-nav__dropdown-menu a::after {
+    display: none;
+}
+
+.site-nav__dropdown-menu a:hover,
+.site-nav__dropdown-menu a:focus-visible {
+    background: rgba(var(--magenta-rgb), 0.18);
+    color: #fff;
+}
+
+.site-nav__dropdown-separator {
+    height: 1px;
+    margin: 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    list-style: none;
+}
+
 .hero h1,
 .section-heading h2,
 .agent-card h2,
@@ -249,7 +373,8 @@ input {
     bottom: 0;
     z-index: 2;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 10.5rem;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     font-family: "League Spartan", sans-serif;
@@ -275,7 +400,11 @@ input {
 }
 
 .hero__copy {
-    padding-top: 4.5rem;
+    padding-top: 6.5rem;
+}
+
+.hero__copy .eyebrow {
+    margin: 0 0 1.5rem;
 }
 
 .eyebrow,
@@ -449,25 +578,19 @@ input {
     border-radius: var(--radius-xl);
 }
 
-.signal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-    list-style: none;
-    margin: 1.1rem 0 0;
-    padding: 0;
+.hero__visual-caption {
+    margin-top: 1.4rem;
+    text-align: center;
 }
 
-.signal-tags li {
-    padding: 0.45rem 0.95rem;
-    background: rgba(var(--stone-rgb), 0.1);
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: rgba(247, 243, 235, 0.8);
-    text-transform: uppercase;
+.hero__visual-caption p {
+    margin: 0 0 0.35rem;
+}
+
+.hero__visual-caption h2 {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.1;
 }
 
 .feature-list,
@@ -640,6 +763,421 @@ input {
     margin: 1.8rem 0 0;
 }
 
+/* ==============================
+   Booking Form (Contact details + Meeting type)
+   ============================== */
+
+.booking-form {
+    margin-top: 1.1rem;
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.booking-form__row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 0.85rem;
+}
+
+.booking-form__row:last-child {
+    margin-bottom: 0;
+}
+
+.booking-form__field-label {
+    flex-shrink: 0;
+    min-width: 2.5rem;
+    color: var(--magenta);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font: inherit;
+    font-size: 0.92rem;
+    transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.booking-form input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+    outline: none;
+    border-color: rgba(var(--magenta-rgb), 0.88);
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 0 0 3px rgba(var(--magenta-rgb), 0.16);
+}
+
+.booking-form select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+                      linear-gradient(135deg, #fff 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.2rem;
+}
+
+.booking-form select option {
+    color: #141C26;
+    background: #fff;
+}
+
+.booking-form input[readonly] {
+    opacity: 0.85;
+    cursor: default;
+}
+
+.booking-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem 0.85rem;
+}
+
+.booking-form__field {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.booking-form__field span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.booking-form__field--full {
+    grid-column: 1 / -1;
+}
+
+.booking-form__email-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.35rem;
+}
+
+.booking-form__email-group input,
+.booking-form__email-group select {
+    min-width: 0;
+}
+
+#bookingEmailUser {
+    flex: 1 1 140px;
+}
+
+.booking-form__domain-select {
+    flex: 1 1 130px;
+    min-width: 0;
+    padding: 0.7rem 1.6rem 0.7rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-sm);
+    background-color: rgba(255, 255, 255, 0.06);
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+                      linear-gradient(135deg, #fff 50%, transparent 50%);
+    background-position: calc(100% - 14px) 50%, calc(100% - 10px) 50%;
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+    color: #fff;
+    font: inherit;
+    font-size: 0.88rem;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+    text-overflow: ellipsis;
+}
+
+.booking-form__domain-select:focus {
+    outline: none;
+    border-color: rgba(var(--magenta-rgb), 0.88);
+    background-color: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 0 0 3px rgba(var(--magenta-rgb), 0.16);
+}
+
+.booking-form__domain-select option {
+    color: #141C26;
+    background: #fff;
+}
+
+.booking-form__domain-custom {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid rgba(var(--magenta-rgb), 0.6);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font: inherit;
+    font-size: 0.92rem;
+    transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.booking-form__domain-custom:focus {
+    outline: none;
+    border-color: rgba(var(--magenta-rgb), 0.88);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(var(--magenta-rgb), 0.16);
+}
+
+.booking-form__domain-custom::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.booking-form__at {
+    align-self: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.booking-form__field--email input[type="text"] {
+    margin-top: 0.4rem;
+}
+
+@media (max-width: 540px) {
+    #bookingEmailUser {
+        flex-basis: 40%;
+    }
+
+    .booking-form__domain-select {
+        flex-basis: 60%;
+    }
+
+    .booking-form__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* ==============================
+   Booking Picker (Calendar + Time)
+   ============================== */
+
+.booking-picker {
+    margin-top: 1.25rem;
+}
+
+.booking-picker__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.booking-picker__title {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.booking-picker__nav {
+    width: 2.1rem;
+    height: 2.1rem;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.booking-picker__nav:hover,
+.booking-picker__nav:focus-visible {
+    background: var(--magenta);
+    border-color: var(--magenta);
+    color: #fff;
+    outline: none;
+}
+
+.booking-picker__nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.booking-picker__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.3rem;
+    margin-bottom: 0.4rem;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.booking-picker__grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.3rem;
+}
+
+.booking-picker__day {
+    aspect-ratio: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.booking-picker__day:hover:not(:disabled),
+.booking-picker__day:focus-visible:not(:disabled) {
+    background: rgba(var(--magenta-rgb), 0.22);
+    border-color: var(--magenta);
+    outline: none;
+}
+
+.booking-picker__day:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+}
+
+.booking-picker__day.is-today {
+    border-color: rgba(var(--magenta-rgb), 0.55);
+}
+
+.booking-picker__day.is-selected {
+    background: var(--magenta);
+    border-color: var(--magenta);
+    color: #fff;
+}
+
+.booking-picker__day.is-empty {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.booking-picker__times {
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.booking-picker__times-label {
+    margin: 0 0 0.75rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.85rem;
+}
+
+.booking-picker__time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+    gap: 0.5rem;
+}
+
+.booking-picker__time {
+    padding: 0.55rem 0.4rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    text-align: center;
+}
+
+.booking-picker__time:hover,
+.booking-picker__time:focus-visible {
+    background: rgba(var(--magenta-rgb), 0.22);
+    border-color: var(--magenta);
+    outline: none;
+}
+
+.booking-picker__time.is-selected {
+    background: var(--magenta);
+    border-color: var(--magenta);
+}
+
+.booking-picker__confirm {
+    margin-top: 1.1rem;
+    padding: 1rem 1.1rem;
+    background: rgba(var(--magenta-rgb), 0.12);
+    border: 1px solid rgba(var(--magenta-rgb), 0.35);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.booking-picker__confirm-text {
+    margin: 0 0 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    color: #fff;
+}
+
+.booking-picker__confirm-label {
+    color: var(--magenta);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.booking-picker__confirm-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.booking-picker__reset {
+    display: block;
+    width: 100%;
+    margin-top: 0.65rem;
+    padding: 0.4rem 0;
+    background: transparent;
+    border: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.18s ease;
+}
+
+.booking-picker__reset:hover,
+.booking-picker__reset:focus-visible {
+    color: #fff;
+    outline: none;
+}
+
 .detail-list div {
     padding-top: 0.85rem;
     border-top: 1px solid var(--line);
@@ -687,9 +1225,11 @@ input {
 
 .contact-card__layout {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-    margin-top: 1.8rem;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .contact-card__details,
@@ -697,6 +1237,44 @@ input {
 .contact-form__grid {
     display: grid;
     gap: 1rem;
+}
+
+.contact-form {
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Condensed business-card style for the contact card */
+.contact-business-card {
+    align-self: start;
+    padding: 0.25rem 0;
+}
+
+.contact-business-card p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.contact-business-card .bc-label {
+    display: inline-block;
+    min-width: 1.85rem;
+    margin-right: 0.55rem;
+    color: var(--magenta);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.contact-business-card a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    word-break: break-word;
+}
+
+.contact-business-card a:hover,
+.contact-business-card a:focus-visible {
+    color: var(--magenta);
 }
 
 .contact-form__grid {
@@ -710,6 +1288,87 @@ input {
 
 .contact-form__field--full {
     grid-column: 1 / -1;
+}
+
+/* Contact form email (2-part input matching the booking form UX) */
+.contact-form__email-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.35rem;
+}
+
+.contact-form__email-group > input,
+.contact-form__email-group > select {
+    min-width: 0;
+    width: auto;
+}
+
+#contactEmailUser {
+    flex: 1 1 220px;
+}
+
+.contact-form__domain-select {
+    flex: 1 1 200px;
+    min-width: 0;
+    padding: 0.95rem 1.6rem 0.95rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    background-color: rgba(255, 255, 255, 0.05);
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+                      linear-gradient(135deg, #fff 50%, transparent 50%);
+    background-position: calc(100% - 14px) 50%, calc(100% - 10px) 50%;
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+    color: #fff;
+    font: inherit;
+    font-size: 0.88rem;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.contact-form__domain-select:focus {
+    outline: none;
+    border-color: rgba(var(--magenta-rgb), 0.88);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(var(--magenta-rgb), 0.16);
+}
+
+.contact-form__domain-select option {
+    color: #141C26;
+    background: #fff;
+}
+
+.contact-form__domain-custom {
+    flex: 1 1 100%;
+    margin-top: 0.4rem;
+    padding: 0.95rem 1rem;
+    border: 1px solid rgba(var(--magenta-rgb), 0.6);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font: inherit;
+    transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.contact-form__domain-custom:focus {
+    outline: none;
+    border-color: rgba(var(--magenta-rgb), 0.88);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 4px rgba(var(--magenta-rgb), 0.16);
+}
+
+.contact-form__at {
+    align-self: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+    font-size: 0.95rem;
+    user-select: none;
 }
 
 .contact-form__field span {
@@ -739,6 +1398,17 @@ input {
 
 .contact-form select {
     appearance: none;
+    color: #fff;
+}
+
+.contact-form select option {
+    color: #141C26;
+    background: #fff;
+}
+
+.contact-form select option:checked {
+    color: #fff;
+    background: var(--magenta);
 }
 
 .contact-form textarea {
@@ -839,6 +1509,10 @@ input {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.calculator-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .calculator-card h3,
 .booking-card h3,
 .insight-card h3 {
@@ -868,17 +1542,257 @@ input {
     border-color: rgba(var(--magenta-rgb), 0.5);
 }
 
+/* Help icon + tooltip for calculator inputs */
+.calculator-card .label-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    line-height: 1.3;
+}
+
+.help-icon {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: rgba(var(--paper-rgb, 247, 243, 235), 0.7);
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: help;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.help-icon:hover,
+.help-icon:focus-visible {
+    background: var(--magenta);
+    color: #fff;
+    border-color: var(--magenta);
+    outline: none;
+}
+
+.help-icon[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
+    width: max-content;
+    max-width: 240px;
+    padding: 0.6rem 0.75rem;
+    background: linear-gradient(180deg, var(--black-soft), var(--black));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: normal;
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 5;
+}
+
+.help-icon[data-tip]::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 0.32rem);
+    right: 0.35rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    background: var(--black-soft);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    transform: rotate(45deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+    z-index: 6;
+}
+
+.help-icon {
+    position: relative;
+}
+
+.help-icon:hover[data-tip]::after,
+.help-icon:hover[data-tip]::before,
+.help-icon:focus-visible[data-tip]::after,
+.help-icon:focus-visible[data-tip]::before,
+.help-icon.is-open[data-tip]::after,
+.help-icon.is-open[data-tip]::before {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+}
+
+/* On the paper-background GDS/TDS explainer context we don't have this issue,
+   but make sure the tooltip stays inside the card by clipping overflow on cards. */
+.calculator-card {
+    overflow: visible;
+}
+
+/* Tighter styling when 4 calculators are side-by-side */
+.calculator-grid .calculator-card {
+    padding: 1.4rem 1.3rem;
+}
+
+.calculator-grid .calculator-card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.7rem;
+    line-height: 1.1;
+}
+
+.calculator-grid .calculator-card label {
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    gap: 0.3rem;
+}
+
+.calculator-grid .calculator-card input {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.9rem;
+}
+
+.calculator-grid .calculator-output {
+    margin-top: 1rem;
+    padding: 0.95rem 1rem;
+}
+
+.calculator-grid .calculator-output strong {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin: 0.3rem 0;
+}
+
+/* Responsive: collapse to 2 columns on tablets, 1 on phones */
+@media (max-width: 1100px) {
+    .calculator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .calculator-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
 .calculator-output {
     margin-top: 1.3rem;
     padding: 1.25rem;
     border-left: 5px solid var(--magenta);
     background: rgba(var(--stone-rgb), 0.42);
     border-radius: var(--radius-md);
+    transition: border-left-color 0.3s ease, background 0.3s ease;
 }
 
 .calculator-output span,
 .calculator-output small {
     color: rgba(198, 190, 169, 0.62);
+}
+
+/* Limit bar — shows the qualifying limit threshold on GDS / TDS calculators */
+.limit-bar {
+    margin-top: 1rem;
+}
+
+.limit-bar__track {
+    position: relative;
+    height: 0.55rem;
+    background: rgba(20, 28, 38, 0.18);
+    border-radius: 999px;
+    overflow: visible;
+}
+
+.limit-bar__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--magenta);
+    border-radius: 999px;
+    transition: width 0.4s ease, background 0.3s ease;
+}
+
+/* Threshold tick (the qualifying limit mark) */
+.limit-bar__threshold {
+    position: absolute;
+    top: -0.35rem;
+    height: 1.25rem;
+    width: 2px;
+    background: var(--ink);
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+
+.limit-bar__threshold-label {
+    position: absolute;
+    top: 1.35rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.limit-bar__legend {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.9rem;
+    font-size: 0.7rem;
+    color: rgba(20, 28, 38, 0.55);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Status states — when within limit (green) or over limit (red) */
+.calculator-output--ok {
+    border-left-color: #2f8f4f;
+    background: rgba(47, 143, 79, 0.14);
+}
+
+.calculator-output--ok strong {
+    color: #2f8f4f;
+}
+
+.calculator-output--ok .limit-bar__fill {
+    background: #2f8f4f;
+}
+
+.calculator-output--ok #gdsStatus,
+.calculator-output--ok #tdsStatus {
+    color: #2f8f4f;
+    font-weight: 600;
+}
+
+.calculator-output--over {
+    border-left-color: #c63636;
+    background: rgba(198, 54, 54, 0.14);
+}
+
+.calculator-output--over strong {
+    color: #c63636;
+}
+
+.calculator-output--over .limit-bar__fill {
+    background: #c63636;
+}
+
+.calculator-output--over #gdsStatus,
+.calculator-output--over #tdsStatus {
+    color: #c63636;
+    font-weight: 600;
 }
 
 .insight-card__type {
@@ -890,11 +1804,91 @@ input {
     color: var(--muted);
 }
 
+.footer-license {
+    width: var(--container);
+    margin: 1.25rem auto 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    font-size: 0.65rem;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .calculator-output strong {
     display: block;
     margin: 0.45rem 0;
     font-size: clamp(2rem, 4vw, 2.8rem);
     line-height: 1;
+}
+
+.calculator-explainer {
+    margin-top: 2.5rem;
+    padding: 2rem 2.25rem;
+    background: linear-gradient(180deg, var(--black-soft), var(--black));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+}
+
+.calculator-explainer h3 {
+    margin: 0 0 0.75rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+}
+
+.calculator-explainer h4 {
+    margin: 1.4rem 0 0.5rem;
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--magenta);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.calculator-explainer p {
+    margin: 0 0 0.75rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.calculator-explainer ul {
+    margin: 0 0 0.85rem 1.25rem;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.calculator-explainer li {
+    margin-bottom: 0.4rem;
+}
+
+.calculator-explainer strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.calculator-explainer a {
+    color: var(--magenta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color 0.2s ease;
+}
+
+.calculator-explainer a:hover,
+.calculator-explainer a:focus-visible {
+    color: #ff7aa8;
 }
 
 .calculator-card--notes {
@@ -943,6 +1937,168 @@ input {
     opacity: 0.72;
 }
 
+/* ==============================
+   FAQ Section
+   ============================== */
+
+.faq {
+    padding: 6rem 0;
+    background: var(--paper);
+    color: var(--ink);
+}
+
+.faq .section-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    color: var(--ink);
+}
+
+.faq .section-heading h2 {
+    color: var(--ink);
+}
+
+.faq .section-heading p {
+    color: rgba(var(--ink-rgb), 0.7);
+}
+
+.faq .section-heading p.section-kicker {
+    color: var(--magenta);
+}
+
+.faq__list {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid rgba(var(--ink-rgb), 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-item[open] {
+    border-color: rgba(var(--magenta-rgb), 0.4);
+    box-shadow: 0 18px 40px -28px rgba(var(--magenta-rgb), 0.4);
+}
+
+.faq-item__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: "Manrope", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink) !important;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+.faq-item__question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item__question::marker {
+    content: "";
+}
+
+.faq-item__question:hover {
+    color: var(--magenta);
+}
+
+.faq-item__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.faq-item__icon::before,
+.faq-item__icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.1rem;
+    height: 2px;
+    background: var(--magenta);
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.faq-item__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item[open] .faq-item__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+}
+
+.faq-item__answer {
+    padding: 0 1.5rem 1.4rem;
+    color: rgba(var(--ink-rgb), 0.78);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.faq-item__answer p {
+    margin: 0 0 0.85rem;
+}
+
+.faq-item__answer p:last-child {
+    margin-bottom: 0;
+}
+
+.faq-item__answer ol,
+.faq-item__answer ul {
+    margin: 0 0 0.85rem 1.25rem;
+    padding: 0;
+}
+
+.faq-item__answer li {
+    margin-bottom: 0.4rem;
+}
+
+.faq-item__answer strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .faq {
+        padding: 4rem 0;
+    }
+
+    .faq-item__question {
+        padding: 1.05rem 1.1rem;
+        font-size: 1rem;
+    }
+
+    .faq-item__answer {
+        padding: 0 1.1rem 1.15rem;
+        font-size: 0.94rem;
+    }
+}
+
+/* Reduced motion: skip reveal animations entirely so content is always visible */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
 .site-footer {
     background: var(--black);
     color: rgba(255, 255, 255, 0.82);
@@ -956,6 +2112,38 @@ input {
 
 .site-footer a {
     color: #fff;
+}
+
+/* Footer business card style (Contact column) */
+.footer-business-card p {
+    margin: 0 0 0.6rem;
+    line-height: 1.45;
+}
+
+.footer-business-card .bc-label {
+    display: inline-block;
+    min-width: 1.85rem;
+    margin-right: 0.55rem;
+    color: var(--magenta);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.footer-business-card a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-business-card a:hover,
+.footer-business-card a:focus-visible {
+    color: var(--magenta);
+}
+
+.footer-business-card .bc-office {
+    margin-top: 0.9rem;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.92rem;
 }
 
 [data-reveal] {
@@ -1084,5 +2272,265 @@ input {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   Mortgages page (mortgages.html)
+   ============================================ */
+
+.page-hero {
+    position: relative;
+    padding: 5.5rem 0 4rem;
+    background:
+        radial-gradient(circle at top right, rgba(var(--magenta-rgb), 0.18), transparent 28%),
+        linear-gradient(180deg, var(--black-soft), var(--black));
+    color: #fff;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+    pointer-events: none;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 75%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 75%);
+}
+
+.page-hero__inner {
+    position: relative;
+    max-width: 880px;
+}
+
+.page-hero h1 {
+    margin: 0 0 1.5rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    max-width: 22ch;
+}
+
+.page-hero__lede {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1.08rem;
+    line-height: 1.7;
+    max-width: 60ch;
+}
+
+/* Mortgage sections (residential + commercial) */
+.mortgage-section {
+    padding: 6rem 0;
+    background: var(--paper);
+    color: var(--ink);
+    border-top: 1px solid rgba(var(--ink-rgb), 0.08);
+}
+
+.mortgage-section--alt {
+    background: #fff;
+}
+
+.mortgage-section__heading {
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.mortgage-section__heading .section-kicker {
+    color: var(--magenta);
+    margin: 0 0 0.6rem;
+}
+
+.mortgage-section__heading h2 {
+    margin: 0 0 0.85rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.mortgage-section__heading p {
+    margin: 0;
+    color: rgba(var(--ink-rgb), 0.72);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+/* Mortgage card grid */
+.mortgage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+.mortgage-card {
+    position: relative;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid rgba(var(--ink-rgb), 0.08);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 14px 28px -18px rgba(var(--ink-rgb), 0.18);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    scroll-margin-top: 6rem;
+}
+
+.mortgage-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--magenta-rgb), 0.34);
+    box-shadow: 0 22px 38px -20px rgba(var(--magenta-rgb), 0.32);
+}
+
+.mortgage-card__kicker {
+    display: inline-block;
+    margin: 0 0 0.85rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(var(--magenta-rgb), 0.12);
+    color: var(--magenta);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 999px;
+}
+
+.mortgage-card h3 {
+    margin: 0 0 0.85rem;
+    font-family: "Manrope", sans-serif;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+}
+
+.mortgage-card p {
+    margin: 0 0 1rem;
+    color: rgba(var(--ink-rgb), 0.78);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.mortgage-card p:last-child {
+    margin-bottom: 0;
+}
+
+.mortgage-card__points {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 1.1rem 0 0;
+    border-top: 1px solid rgba(var(--ink-rgb), 0.1);
+    display: grid;
+    gap: 0.55rem;
+}
+
+.mortgage-card__points li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: rgba(var(--ink-rgb), 0.78);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
+.mortgage-card__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-left: 2px solid var(--magenta);
+    border-bottom: 2px solid var(--magenta);
+    transform: rotate(-45deg);
+}
+
+/* Bottom CTA section */
+.mortgage-cta {
+    padding: 8rem 0 7rem;
+    background:
+        radial-gradient(circle at top left, rgba(var(--magenta-rgb), 0.18), transparent 28%),
+        linear-gradient(180deg, var(--black-soft), var(--black));
+    color: #fff;
+}
+
+.mortgage-cta__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 720px);
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.mortgage-cta__copy .section-kicker {
+    color: var(--magenta);
+    margin: 0 0 0.6rem;
+}
+
+.mortgage-cta__copy h2 {
+    margin: 0 0 0.85rem;
+    font-family: "League Spartan", sans-serif;
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.mortgage-cta__copy p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    max-width: 50ch;
+}
+
+.mortgage-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.mortgage-cta__actions .button {
+    flex: 0 0 auto;
+    min-width: 200px;
+}
+
+/* Mobile-friendly adjustments for the new page */
+@media (max-width: 1120px) {
+    .mortgage-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mortgage-cta__inner {
+        text-align: left;
+    }
+}
+
+@media (max-width: 720px) {
+    .page-hero {
+        padding: 4rem 0 3rem;
+    }
+
+    .mortgage-section,
+    .mortgage-cta {
+        padding: 5rem 0 4.5rem;
+    }
+
+    .mortgage-card {
+        padding: 1.5rem;
+    }
+
+    .mortgage-cta__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mortgage-cta__actions .button {
+        width: 100%;
     }
 }

@@ -2276,6 +2276,52 @@ input {
 }
 
 /* ============================================
+   Phase 1 motion enhancements
+   ============================================ */
+
+/* When Lenis is active, prevent the body from scrolling natively.
+   Lenis adds this class to <html> on init. */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+/* Hero word reveal: each word lives inside a clip mask so the inner
+   translate-up animation appears as a curtain reveal. */
+.split-words .word {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1.05;
+    padding-bottom: 0.05em;
+    vertical-align: top;
+}
+
+.split-words .word__inner {
+    display: inline-block;
+    will-change: transform, opacity;
+    transform: translateY(0);
+}
+
+/* Magnetic CTA buttons: ensure the button stays in place during the
+   hover-follow effect (transform is applied inline by JS). */
+.magnetic {
+    will-change: transform;
+}
+
+/* During hero word reveal, prevent flash of unstyled words */
+.split-words:not(.is-words-ready) .word__inner {
+    opacity: 0;
+}
+
+/* ============================================
    Mortgages page (mortgages.html)
    ============================================ */
 

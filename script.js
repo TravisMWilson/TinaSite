@@ -766,6 +766,229 @@ function enableRevealAnimations() {
     revealedElements.forEach((element) => observer.observe(element));
 }
 
+/* ============================================
+   Phase 1 motion: Lenis smooth scroll + GSAP cinematic reveals + magnetic CTAs
+   ============================================ */
+
+// Lenis smooth scroll: replaces the jumpy default scroll with smooth inertia.
+// Falls back gracefully when Lenis isn't loaded (e.g. CDN blocked).
+function enableSmoothScroll() {
+    if (prefersReducedMotion) return;
+    if (typeof Lenis === "undefined") return;
+
+    const lenis = new Lenis({
+        duration: 1.05,         // scroll animation duration (seconds)
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth ease-out
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.4,
+    });
+
+    // Expose lenis for debugging
+    window.__lenis = lenis;
+
+    // Standard Lenis + GSAP integration: GSAP's ticker is the master clock.
+// GSAP ticks normally (driving all tweens), and on each tick we also
+// pump Lenis. ScrollTrigger listens to Lenis's scroll event so it
+// updates trigger positions whenever the user scrolls.
+    if (typeof gsap !== "undefined") {
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+    }
+
+    if (typeof ScrollTrigger !== "undefined") {
+        lenis.on("scroll", ScrollTrigger.update);
+    }
+
+    // Force ScrollTrigger to recalculate now that the page is fully loaded
+    if (typeof ScrollTrigger !== "undefined") {
+        ScrollTrigger.refresh();
+    }
+
+    // Make in-page anchor links (e.g. <a href="#contact">) scroll smoothly
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const href = link.getAttribute("href");
+            if (!href || href === "#") return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            event.preventDefault();
+            lenis.scrollTo(target, { offset: -80, duration: 1.1 });
+        });
+    });
+
+    // Recalculate ScrollTrigger positions once everything is laid out
+    if (typeof ScrollTrigger !== "undefined") {
+        setTimeout(() => ScrollTrigger.refresh(), 100);
+    }
+
+    return lenis;
+}
+
+// Split text into words (preserves spacing) so each word can be animated individually.
+// Used for the hero h1 word-by-word reveal.
+function splitWordsIntoSpans(element) {
+    if (!element || element.dataset.splitDone === "true") return;
+
+    const text = element.textContent;
+    const html = text
+        .split(/(\s+)/)
+        .map((segment) => {
+            if (/^\s+$/.test(segment)) return segment; // preserve spaces
+            return `<span class="word"><span class="word__inner">${segment}</span></span>`;
+        })
+        .join("");
+
+    element.innerHTML = html;
+    element.dataset.splitDone = "true";
+}
+
+// GSAP-powered cinematic reveals + hero word reveal.
+// Replaces (and supersedes) the previous IntersectionObserver fade-in for elements
+// that opt-in via [data-reveal] or [data-reveal-stagger]. The old fallback CSS
+// still runs as a no-JS safety net.
+function enableGsapAnimations() {
+    if (typeof gsap === "undefined") return;
+    if (prefersReducedMotion) {
+        // For reduced motion, just show everything immediately
+        document.querySelectorAll("[data-reveal], [data-reveal-stagger]")
+            .forEach((el) => el.classList.add("is-visible"));
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- Hero word reveal ---
+    document.querySelectorAll(".split-words").forEach((heading) => {
+        splitWordsIntoSpans(heading);
+        const words = heading.querySelectorAll(".word__inner");
+        gsap.fromTo(words, 
+            { yPercent: 110, opacity: 0, rotateX: -35 },
+            {
+                yPercent: 0,
+                opacity: 1,
+                rotateX: 0,
+                duration: 0.85,
+                ease: "power4.out",
+                stagger: 0.06,
+                delay: 0.15,
+            }
+        );
+    });
+
+    // --- Generic single-element reveal (replaces old IntersectionObserver for [data-reveal]) ---
+    const singleReveal = document.querySelectorAll("[data-reveal]");
+    singleReveal.forEach((element) => {
+        // Skip elements that are inside a stagger group; they're handled below
+        if (element.closest("[data-reveal-stagger]")) return;
+
+        gsap.fromTo(element,
+            { y: 32, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.9,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 88%",
+                    toggleActions: "play none none none",
+                },
+                onStart: () => element.classList.add("is-visible"),
+            }
+        );
+    });
+
+    // --- Staggered reveal for groups (cards, list items, etc.) ---
+    const staggerGroups = document.querySelectorAll("[data-reveal-stagger]");
+    staggerGroups.forEach((group) => {
+        const children = group.children;
+        gsap.fromTo(children,
+            { y: 28, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: "power3.out",
+                stagger: 0.08,
+                scrollTrigger: {
+                    trigger: group,
+                    start: "top 85%",
+                    toggleActions: "play none none none",
+                },
+                onStart: () => {
+                    Array.from(children).forEach((child) => child.classList.add("is-visible"));
+            },
+        });
+    });
+}
+
+// Magnetic CTA buttons: when the cursor gets near a .magnetic element, the
+// element subtly translates toward the cursor with a soft elastic return.
+// Disabled on touch devices (no hover) and when reduced motion is preferred.
+function enableMagneticButtons() {
+    if (prefersReducedMotion) return;
+    if (window.matchMedia("(hover: none)").matches) return; // touch device
+
+    const strength = 0.32; // 0 = no movement, 1 = full follow
+
+    document.querySelectorAll(".magnetic").forEach((button) => {
+        // Make sure the button can be transformed without layout shift
+        button.style.willChange = "transform";
+        button.style.transition = "transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2)";
+
+        let bounds = null;
+        let rafId = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        const refreshBounds = () => {
+            bounds = button.getBoundingClientRect();
+        };
+
+        const animate = () => {
+            // Spring smoothing toward the target
+            currentX += (targetX - currentX) * 0.18;
+            currentY += (targetY - currentY) * 0.18;
+            button.style.transform = `translate(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px)`;
+
+            if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+                rafId = requestAnimationFrame(animate);
+            } else {
+                rafId = 0;
+            }
+        };
+
+        button.addEventListener("pointerenter", () => {
+            refreshBounds();
+            if (!rafId) rafId = requestAnimationFrame(animate);
+        });
+
+        button.addEventListener("pointermove", (event) => {
+            if (!bounds) refreshBounds();
+            const centerX = bounds.left + bounds.width / 2;
+            const centerY = bounds.top + bounds.height / 2;
+            targetX = (event.clientX - centerX) * strength;
+            targetY = (event.clientY - centerY) * strength;
+            if (!rafId) rafId = requestAnimationFrame(animate);
+        });
+
+        button.addEventListener("pointerleave", () => {
+            targetX = 0;
+            targetY = 0;
+            bounds = null;
+            if (!rafId) rafId = requestAnimationFrame(animate);
+        });
+
+        // Recompute bounds on resize so the effect stays accurate
+        window.addEventListener("resize", refreshBounds, { passive: true });
+    });
+}
+
 function enableHeroPointerGlow() {
     const hero = document.querySelector(".hero");
 
@@ -878,11 +1101,37 @@ updateApplyExperience();
 initContactForm();
 initBookingPicker();
 bindCalculatorEvents();
-enableRevealAnimations();
+enableRevealAnimations();     // Fallback IO reveals for no-JS / reduced-motion
+enableMagneticButtons();      // Magnetic effect on .magnetic CTA buttons
 enableHeroPointerGlow();
 enableTiltInteractions();
 enableScrollIndicators();
 updateFooterYear();
+
+// Phase 1 motion (CDN-loaded libraries) — initialize once GSAP/Lenis are ready.
+// The deferred CDN scripts may still be loading when script.js runs at end-of-body,
+// so we poll briefly and then boot. Falls back gracefully if libraries never load.
+(function bootPhase1Motion() {
+    let attempts = 0;
+    const maxAttempts = 20; // ~2s of polling
+
+    const tryBoot = () => {
+        const ready = typeof gsap !== "undefined" && typeof Lenis !== "undefined";
+        if (ready || attempts >= maxAttempts) {
+            enableSmoothScroll();
+            enableGsapAnimations();
+            return;
+        }
+        attempts++;
+        setTimeout(tryBoot, 100);
+    };
+
+    if (document.readyState === "complete") {
+        tryBoot();
+    } else {
+        window.addEventListener("load", tryBoot, { once: true });
+    }
+})();
 // Help icon tooltips: click toggles persistent state for touch users
 (function () {
     const helpIcons = document.querySelectorAll(".help-icon[data-tip]");

@@ -1,5 +1,5 @@
 const siteConfig = {
-    websiteUrl: "https://hamaouimortgages.ca",
+    websiteUrl: "https://hamaouimortgages.com",
     applyUrl: "https://breezeful.com/brokerage-agent/catherine-hamaoui",
     personalPageUrl: "https://breezeful.com/brokerage-agent/catherine-hamaoui",
     bookingUrl: ""

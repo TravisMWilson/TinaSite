@@ -358,12 +358,25 @@ input {
 .hero__mesh {
     position: absolute;
     inset: 0;
-    background:
-        linear-gradient(110deg, rgba(var(--stone-rgb), 0.06), transparent 32%),
-        radial-gradient(circle at 88% 20%, rgba(var(--magenta-rgb), 0.12), transparent 18%),
-        radial-gradient(circle at 6% 80%, rgba(var(--stone-rgb), 0.08), transparent 24%);
     pointer-events: none;
-    animation: meshDrift 16s ease-in-out infinite alternate;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* When the WebGL mesh is active, hide any CSS gradient fallback that was
+   originally set up here. The canvas inside .hero__mesh takes over. */
+.hero__mesh.has-webgl {
+    background: none;
+    animation: none;
+}
+
+/* The OGL canvas fills its parent and sits behind the hero content */
+.hero__mesh canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .hero__signature {

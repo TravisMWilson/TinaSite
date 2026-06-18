@@ -18,6 +18,17 @@
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <!-- Lenis for smooth scroll (replaces jumpy default scroll with buttery inertia) -->
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <!-- Importmap: lets us use OGL (ESM-only) directly from a CDN -->
+    <script type="importmap">
+    {
+        "imports": {
+            "ogl": "https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm"
+        }
+    }
+    </script>
+
+    <!-- OGL: lightweight WebGL library used for the hero gradient mesh -->
+    <script type="module" src="script-ogl.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>

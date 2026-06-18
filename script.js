@@ -1073,6 +1073,13 @@ function animateCounter(counter) {
     requestAnimationFrame(tick);
 }
 
+/* ============================================
+   WebGL hero mesh (OGL)
+   ============================================
+   The WebGL hero mesh is implemented as a separate ES module
+   (script-ogl.js) so it can use OGL via the importmap declared in
+   index.html. The module self-initializes on DOMContentLoaded. */
+
 function enableHeroPointerGlow() {
     const hero = document.querySelector(".hero");
 
@@ -1192,6 +1199,8 @@ enableHeroPointerGlow();
 enableTiltInteractions();
 enableScrollIndicators();
 updateFooterYear();
+
+// The WebGL hero mesh initializes itself via script-ogl.js (ES module).
 
 // Phase 1 motion (CDN-loaded libraries) — initialize once GSAP/Lenis are ready.
 // The deferred CDN scripts may still be loading when script.js runs at end-of-body,

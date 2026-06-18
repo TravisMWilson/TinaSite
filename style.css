@@ -2208,6 +2208,121 @@ input {
     }
 }
 
+/* ============================================
+   Stats strip — quantified trust signals
+   ============================================ */
+
+.stats {
+    padding: 5rem 0 4.5rem;
+    background:
+        radial-gradient(circle at top right, rgba(var(--magenta-rgb), 0.14), transparent 26%),
+        linear-gradient(180deg, var(--black-soft), var(--black));
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stats__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+    text-align: center;
+    align-items: end;
+}
+
+.stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    position: relative;
+}
+
+/* Vertical separators between stat items (desktop) */
+.stats__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -1.25rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+}
+
+.stats__value {
+    font-family: "League Spartan", sans-serif;
+    font-size: clamp(3.25rem, 6vw, 4.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--magenta);
+    /* Subtle gradient sheen on the number */
+    background: linear-gradient(180deg, var(--magenta) 0%, #ff7aa8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Use tabular numerals so the number doesn't jitter during animation */
+    font-variant-numeric: tabular-nums;
+}
+
+.stats__label {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.98rem;
+    line-height: 1.4;
+    max-width: 22ch;
+}
+
+.stats__label sup {
+    color: var(--magenta);
+    font-size: 0.7em;
+    margin-left: 0.1em;
+}
+
+.stats__footnote {
+    margin: 2.5rem auto 0;
+    max-width: 56rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.stats__footnote sup {
+    color: var(--magenta);
+}
+
+/* Mobile: stack the stats vertically */
+@media (max-width: 720px) {
+    .stats__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .stats__item:not(:last-child)::after {
+        right: 1.5rem;
+        left: 1.5rem;
+        top: auto;
+        bottom: -1rem;
+        width: auto;
+        height: 1px;
+        background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.18),
+            transparent
+        );
+    }
+    .stats__value {
+        font-size: 3rem;
+    }
+}
+
 /* Mobile: slightly smaller text, slower speed for readability */
 @media (max-width: 720px) {
     .marquee__track {

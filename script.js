@@ -989,6 +989,90 @@ function enableMagneticButtons() {
     });
 }
 
+// Parallax: as the page scrolls, move the .parallax element at a fraction
+// of the scroll speed, creating a sense of depth. Uses GSAP ScrollTrigger
+// with `scrub` for buttery-smooth scroll-linked motion.
+function enableParallax() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+    if (prefersReducedMotion) return;
+
+    document.querySelectorAll(".parallax").forEach((element) => {
+        const speed = parseFloat(element.dataset.parallaxSpeed) || 0.35;
+        // Move the element from +offset to -offset as the user scrolls
+        // through the element's natural viewport range.
+        gsap.fromTo(element,
+            { yPercent: -speed * 10 },
+            {
+                yPercent: speed * 10,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                },
+            }
+        );
+    });
+}
+
+// Number count-up: when a [data-count-to] element scrolls into view, animate
+// its text from 0 (or current) to the target value. Uses easeOutCubic for a
+// natural deceleration. Respects prefers-reduced-motion (jumps to final value).
+function enableCountUp() {
+    const counters = document.querySelectorAll("[data-count-to]");
+    if (!counters.length) return;
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        // Reduced motion or no IO: just set the final value immediately
+        counters.forEach(setCounterFinal);
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    counters.forEach((counter) => observer.observe(counter));
+}
+
+function setCounterFinal(counter) {
+    const target = Number(counter.dataset.countTo) || 0;
+    const prefix = counter.dataset.countPrefix || "";
+    const suffix = counter.dataset.countSuffix || "";
+    counter.textContent = `${prefix}${target}${suffix}`;
+}
+
+function animateCounter(counter) {
+    const target = Number(counter.dataset.countTo) || 0;
+    const prefix = counter.dataset.countPrefix || "";
+    const suffix = counter.dataset.countSuffix || "";
+    const duration = 1600; // ms
+    const start = performance.now();
+
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = easeOutCubic(progress);
+        const current = Math.round(target * eased);
+        counter.textContent = `${prefix}${current}${suffix}`;
+        if (progress < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            counter.textContent = `${prefix}${target}${suffix}`;
+        }
+    }
+    requestAnimationFrame(tick);
+}
+
 function enableHeroPointerGlow() {
     const hero = document.querySelector(".hero");
 
@@ -1103,6 +1187,7 @@ initBookingPicker();
 bindCalculatorEvents();
 enableRevealAnimations();     // Fallback IO reveals for no-JS / reduced-motion
 enableMagneticButtons();      // Magnetic effect on .magnetic CTA buttons
+enableCountUp();              // Number count-up animation (no CDN dependency)
 enableHeroPointerGlow();
 enableTiltInteractions();
 enableScrollIndicators();
@@ -1120,6 +1205,7 @@ updateFooterYear();
         if (ready || attempts >= maxAttempts) {
             enableSmoothScroll();
             enableGsapAnimations();
+            enableParallax();      // GSAP ScrollTrigger scrub-based parallax
             return;
         }
         attempts++;

@@ -2091,6 +2091,138 @@ input {
     }
 }
 
+/* ============================================
+   Marquee strip — continuous scrolling trust band
+   ============================================ */
+
+.marquee {
+    /* Spans full viewport width; sits above the section border so it
+       reads as a separate element rather than part of the next section */
+    width: 100%;
+    overflow: hidden;
+    background: var(--black);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.marquee__row {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    /* Soft fade at the edges so items don't pop in/out harshly */
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 8%,
+        #000 92%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 8%,
+        #000 92%,
+        transparent 100%
+    );
+}
+
+.marquee__track {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-shrink: 0;
+    /* The animation translates the entire track; the duplicate set creates
+       an endless loop illusion when the first set scrolls off-screen. */
+    animation: marquee-left 38s linear infinite;
+    will-change: transform;
+}
+
+.marquee__row--right .marquee__track {
+    /* Reverse direction for visual interest */
+    animation-name: marquee-right;
+    animation-duration: 44s;
+}
+
+.marquee__row:hover .marquee__track {
+    /* Pause on hover so visitors can read */
+    animation-play-state: paused;
+}
+
+.marquee__item {
+    font-family: "Manrope", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    /* Subtle metallic sheen to keep it from looking flat */
+    background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.marquee__row--right .marquee__item {
+    /* Second row in magenta for contrast */
+    background: linear-gradient(180deg, var(--magenta) 0%, rgba(198, 54, 113, 0.7) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.marquee__dot {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.marquee__row--right .marquee__dot {
+    color: rgba(198, 54, 113, 0.6);
+}
+
+@keyframes marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+/* Reduced motion: stop the animation and show items centered without scrolling */
+@media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+        animation: none !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .marquee {
+        padding: 1rem;
+    }
+}
+
+/* Mobile: slightly smaller text, slower speed for readability */
+@media (max-width: 720px) {
+    .marquee__track {
+        gap: 1.5rem;
+        animation-duration: 30s;
+    }
+    .marquee__row--right .marquee__track {
+        animation-duration: 34s;
+    }
+    .marquee__item {
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+    }
+}
+
 /* Reduced motion: skip reveal animations entirely so content is always visible */
 @media (prefers-reduced-motion: reduce) {
     [data-reveal] {
